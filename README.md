@@ -26,23 +26,23 @@ O gerenciamento de horários, cadastro de clientes, coleta de informações e pr
 
 ### Agendamento
 
-Permite organizar e gerenciar os horários dos atendimentos. A funcionalidade foi desenvolvida para facilitar a visualização da agenda e reduzir conflitos de horários, tornando o processo de marcação mais organizado.
+Permite organizar e gerenciar os horários dos atendimentos da clínica de forma centralizada. A funcionalidade possibilita registrar os compromissos e visualizar a agenda de maneira mais clara, facilitando o acompanhamento da rotina dos profissionais. Além de auxiliar no controle dos horários disponíveis e ocupados, o agendamento busca reduzir conflitos e sobreposições de horários. Dessa forma, o profissional consegue planejar melhor sua rotina e ter uma visão mais organizada dos atendimentos que serão realizados
 
 ### Gestão de clientes
 
-Centraliza as informações dos clientes em um único ambiente. Isso permite que os profissionais tenham acesso mais rápido aos dados necessários e reduz a necessidade de consultar diferentes fontes de informação.
+Centraliza as informações dos clientes em um único ambiente, permitindo que os dados necessários sejam acessados de maneira mais rápida e organizada pelos profissionais. A centralização reduz a necessidade de consultar diferentes fontes para encontrar informações relacionadas a um cliente. Além disso, permite que os dados cadastrados sejam utilizados em outras etapas do fluxo da aplicação, como o agendamento e o pré-atendimento. Dessa forma, a funcionalidade contribui para manter as informações estruturadas e facilitar o acompanhamento dos clientes ao longo dos atendimentos.
 
 ### Pré-atendimento
 
-Permite que o cliente forneça informações antes do atendimento. Essa funcionalidade busca antecipar determinadas etapas do processo, permitindo que o profissional tenha acesso aos dados previamente e possa se preparar melhor para o atendimento.
+Permite que o cliente forneça determinadas informações antes da realização do atendimento. Essa funcionalidade tem como objetivo antecipar etapas que normalmente poderiam ser realizadas somente no momento da chegada do cliente à clínica. Com as informações disponíveis previamente, o profissional pode consultar os dados antes do atendimento e se preparar de maneira mais adequada. Isso também contribui para reduzir o tempo gasto com tarefas administrativas e tornar o processo mais organizado. O pré-atendimento funciona, portanto, como uma etapa de preparação, conectando o momento do agendamento ao atendimento propriamente dito.
 
 ### Organização dos atendimentos
 
-Auxilia o profissional no acompanhamento de sua rotina. A centralização dos atendimentos permite visualizar os compromissos e as informações relacionadas aos clientes de forma mais estruturada.
+Auxilia o profissional no acompanhamento de sua rotina, reunindo informações relacionadas aos atendimentos em um ambiente centralizado. A funcionalidade facilita a visualização dos compromissos e permite que o profissional tenha uma visão mais estruturada de sua agenda e dos clientes que serão atendidos. Essa organização é importante principalmente em situações em que existem vários atendimentos ao longo do dia, pois reduz a necessidade de procurar informações em diferentes locais e facilita o planejamento da rotina profissional.
 
 ### Agilidade no atendimento
 
-Ao integrar agendamento, informações dos clientes e pré-atendimento, o Clientta busca reduzir tarefas repetitivas e processos manuais. O objetivo não é apenas executar as tarefas mais rapidamente, mas também reduzir a complexidade do fluxo de atendimento.
+Ao integrar o agendamento, as informações dos clientes e o pré-atendimento, o Clientta busca reduzir a quantidade de tarefas repetitivas e processos manuais presentes na rotina da clínica. A antecipação de determinadas etapas permite que informações importantes estejam disponíveis antes do momento do atendimento. Com isso, o profissional pode dedicar menos tempo a atividades administrativas e concentrar seus esforços na realização do atendimento. O objetivo não é apenas tornar as tarefas mais rápidas, mas também simplificar o fluxo de trabalho, reduzir retrabalho e tornar o processo de atendimento mais organizado e eficiente.
 
 ## Tecnologias utilizadas
 
