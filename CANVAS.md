@@ -837,10 +837,10 @@ A interface deverá:
 
 | Integrante | Papel principal | Responsável por |
 | ----- | ----- | ----- |
-| **Ana Clara** | Dev / telas | Interfaces, navegação, componentes e fluxo do usuário |
-| **Sofia** | Dev / dados | Room, entidades, DAO, Repository e organização dos dados |
-| **Letícia** | Design / identidade | Cores, ícones, componentes visuais e experiência do usuário |
-| **Maria Eduarda** | Documentação / build | README, documentação, testes, organização e geração do APK/AAB |
+| **Sofia** |Design / identidade | Cores, ícones, componentes visuais e experiência do usuário |
+| **Letícia** | Dev / dados | Room, entidades, DAO, Repository, navegation, organização do código e dos dados e telas |
+| **Maria Eduarda** | Design / identidade | Cores, ícones, componentes visuais e experiência do usuário |
+| **Ana Clara** | Documentação / build | README, documentação, testes, organização e geração do APK/AAB |
 
 Todas as integrantes participarão da programação.
 
