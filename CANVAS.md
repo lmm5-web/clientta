@@ -536,81 +536,58 @@ O MVP continuará limitado a **4 funcionalidades principais**, agrupando recurso
 
 ---
 
-# **🗃️ Bloco 11 — Estrutura inicial dos dados**
-
-O aplicativo utilizará o **Room** para armazenar os dados localmente.
-
-## **Entidade Cliente**
-
-Principais campos:
-
-* `id`
-
-* `nome`
-
-* `cpf`
-
-* `dataNascimento`
-
-* `telefone`
-
-* `email`
-
-* `senha`
-
-## **Entidade Profissional**
-
-* `id`
-
-* `nome`
-
-* `email`
-
-* `telefone`
-
-* `especialidade`
-
-## **Entidade Tratamento**
-
-* `id`
-
-* `nome`
-
-* `descricao`
-
-* `preco`
-
-* `duracao`
-
-* `ativo`
-
-## **Entidade Agendamento**
-
-* `id`
-
-* `clienteId`
-
-* `tratamentoId`
-
-* `data`
-
-* `horario`
-
-* `status`
-
-## **Entidade PreAtendimento**
-
-* `id`
-
-* `agendamentoId`
-
-* `respostas`
-
-* `termoAceito`
-
-* `dataPreenchimento`
-
-> A estrutura poderá ser simplificada durante o desenvolvimento caso alguma relação fique complexa demais para o prazo.
+ Bloco 11 — Estrutura inicial dos dados (Entidades)
+​O aplicativo utilizará o Room DataBase para armazenar e gerenciar os dados localmente. Abaixo está o detalhamento do papel, responsabilidade e campos de cada entidade:
+​1. Entidade Cliente
+​Descrição & Responsabilidade: Representa o usuário consumidor dos serviços estéticos. Armazena dados pessoais, de contato e credenciais de acesso.
+​Papel no Sistema: Realizar autenticação (login/cadastro) e vincular o histórico de atendimentos e fichas de anamnese.
+​Campos:
+​id: Identificador único do cliente (PrimaryKey, Auto-gerado).
+​nome: Nome completo do cliente.
+​cpf: Cadastro de Pessoa Física (para identificação cadastral).
+​dataNascimento: Data de nascimento do cliente.
+​telefone: Telefone de contato principal.
+​email: Endereço de e-mail do cliente.
+​senha: Senha de acesso/autenticação.
+​2. Entidade Profissional
+​Descrição & Responsabilidade: Representa o profissional de saúde/estética responsável pela execução dos procedimentos.
+​Papel no Sistema: Associar a responsabilidade técnica de cada sessão de atendimento e permitir o gerenciamento da agenda do profissional.
+​Campos:
+​id: Identificador único do profissional (PrimaryKey, Auto-gerado).
+​nome: Nome completo do profissional.
+​email: E-mail corporativo/de acesso.
+​telefone: Contato telefônico profissional.
+​especialidade: Área de atuação técnica (ex: Harmonização Facial, Depilação a Laser, Estética Corporal).
+​3. Entidade Tratamento
+​Descrição & Responsabilidade: Catálogo de procedimentos e serviços oferecidos pela clínica.
+​Papel no Sistema: Fornecer parâmetros operacionais (preço, duração e status) para a montagem de novos agendamentos.
+​Campos:
+​id: Identificador único do tratamento (PrimaryKey, Auto-gerado).
+​nome: Nome comercial do procedimento.
+​descricao: Detalhes sobre a técnica ou objetivo do tratamento.
+​preco: Valor do procedimento em moeda local.
+​duracao: Duração estimada do atendimento (em minutos).
+​ativo: Indicador booleano (true/false) para sinalizar se o procedimento está disponível para agendamento.
+​4. Entidade Agendamento
+​Descrição & Responsabilidade: Entidade central de negócio que correlaciona o cliente ao serviço e horário desejados.
+​Papel no Sistema: Controlar a agenda da clínica e o fluxo de status de cada sessão (reserva, confirmação, conclusão ou cancelamento).
+​Campos:
+​id: Identificador único do agendamento (PrimaryKey, Auto-gerado).
+​clienteId: Chave estrangeira (ForeignKey) referente ao Cliente.
+​tratamentoId: Chave estrangeira (ForeignKey) referente ao Tratamento.
+​data: Data agendada para a realização do serviço.
+​horario: Horário marcado para o atendimento.
+​status: Estado atual da sessão (ex: PENDENTE, CONFIRMADO, CONCLUIDO, CANCELADO).
+​5. Entidade PreAtendimento
+​Descrição & Responsabilidade: Formulário de anamnese e consentimento prévio do cliente.
+​Papel no Sistema: Garantir a segurança clínica e jurídica, registrando contraindicações, histórico de saúde e aceite formal dos termos antes da sessão.
+​Campos:
+​id: Identificador único do registro de pré-atendimento (PrimaryKey, Auto-gerado).
+​agendamentoId: Chave estrangeira (ForeignKey) referente ao Agendamento.
+​respostas: Questões respondidas sobre histórico de saúde e alergias.
+​termoAceito: Indicador booleano (true/false) da aceitação do termo de consentimento.
+​dataPreenchimento: Carimbo de data/hora do preenchimento da ficha.
+​A estrutura poderá ser simplificada durante o desenvolvimento caso alguma relação fique complexa demais para o prazo.
 
 ---
 
