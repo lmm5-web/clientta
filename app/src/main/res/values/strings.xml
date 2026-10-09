@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Clientta</string>
+
+    <!-- Estados Vazios -->
+    <string name="empty_agendamentos">Você ainda não possui agendamentos.</string>
+    <string name="empty_tratamentos">Nenhum tratamento disponível no momento.</string>
+    <string name="empty_clientes">Ainda não existem clientes cadastrados.</string>
+    <string name="empty_pre_atendimento">O pré-atendimento ainda não foi preenchido.</string>
+
+    <!-- Mensagens de Erro e Validação -->
+    <string name="error_required_fields">Preencha todos os campos obrigatórios.</string>
+    <string name="error_invalid_email">Digite um e-mail válido.</string>
+    <string name="error_cpf_exists">Este CPF já está cadastrado.</string>
+    <string name="error_email_exists">Este e-mail já está cadastrado.</string>
+    <string name="error_invalid_login">E-mail ou senha incorretos.</string>
+    <string name="error_save_cadastro">Não foi possível salvar o cadastro. Tente novamente.</string>
+    <string name="error_load_data">Não foi possível carregar as informações.</string>
+    <string name="error_save_agendamento">Não foi possível realizar o agendamento.</string>
+    <string name="error_unavailable_time">Esse horário não está disponível.</string>
+    <string name="error_save_pre_atendimento">Não foi possível salvar o pré-atendimento.</string>
+    <string name="error_terms_not_accepted">Confirme que você leu o termo para continuar.</string>
+
+    <!-- Ações Gerais -->
+    <string name="btn_entrar">Entrar</string>
+    <string name="btn_cadastrar">Cadastrar</string>
+    <string name="btn_salvar">Salvar</string>
+    <string name="btn_confirmar">Confirmar</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="btn_voltar">Voltar</string>
+</resources>

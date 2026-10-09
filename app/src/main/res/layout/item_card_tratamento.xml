@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/spacing_medium"
+    android:background="@drawable/bg_card_treatment"
+    android:padding="@dimen/spacing_medium">
+
+    <!-- Imagem quadrada do tratamento à esquerda -->
+    <ImageView
+        android:id="@+id/img_tratamento"
+        android:layout_width="@dimen/card_image_size"
+        android:layout_height="@dimen/card_image_size"
+        android:contentDescription="Tratamento"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_placeholder_treatment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Título do Tratamento -->
+    <TextView
+        android:id="@+id/tv_nome_tratamento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginEnd="@dimen/spacing_small"
+        android:text="Limpeza de Pele Profunda"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/text_large"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/btn_nav_arrow"
+        app:layout_constraintStart_toEndOf="@id/img_tratamento"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Subtítulo e Duração -->
+    <TextView
+        android:id="@+id/tv_duracao_tratamento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="@dimen/spacing_small"
+        android:text="Higienização e hidratação • 60 min"
+        android:textColor="@color/text_secondary"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintEnd_toStartOf="@id/btn_nav_arrow"
+        app:layout_constraintStart_toEndOf="@id/img_tratamento"
+        app:layout_constraintTop_toBottomOf="@id/tv_nome_tratamento" />
+
+    <!-- Preço em Roxo / Negrito -->
+    <TextView
+        android:id="@+id/tv_preco_tratamento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:text="R$ 120,00"
+        android:textColor="@color/purple_primary"
+        android:textSize="@dimen/text_large"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img_tratamento"
+        app:layout_constraintTop_toBottomOf="@id/tv_duracao_tratamento" />
+
+    <!-- Seta de Navegação Roxa (#673AB7) à direita -->
+    <ImageView
+        android:id="@+id/btn_nav_arrow"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:contentDescription="Acessar tratamento"
+        android:src="@drawable/ic_arrow_forward_purple"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
