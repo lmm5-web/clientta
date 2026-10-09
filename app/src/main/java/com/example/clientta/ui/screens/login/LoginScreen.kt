@@ -31,7 +31,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.clientta.ui.theme.ClienttaBackground
+import com.example.clientta.ui.theme.ClienttaBorderGray
 import com.example.clientta.ui.theme.ClienttaPrimary
+import com.example.clientta.ui.theme.ClienttaTextPrimary
+import com.example.clientta.ui.theme.ClienttaTextSecondary
+import com.example.clientta.ui.theme.ClienttaWhite
 import com.example.clientta.viewmodel.LoginViewModel
 
 @Composable
@@ -64,15 +69,15 @@ fun LoginScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .background(ClienttaBackground)
             .padding(24.dp),
         contentAlignment = Alignment.Center
     ) {
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            colors = CardDefaults.cardColors(containerColor = ClienttaWhite),
+            elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
         ) {
             Column(
                 modifier = Modifier
@@ -91,7 +96,7 @@ fun LoginScreen(
                 Text(
                     text = "Gestão e Agendamento de Estética",
                     fontSize = 14.sp,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                    color = ClienttaTextSecondary,
                     modifier = Modifier.padding(bottom = 24.dp)
                 )
 
@@ -105,8 +110,10 @@ fun LoginScreen(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = ClienttaPrimary,
+                        unfocusedBorderColor = ClienttaBorderGray,
                         focusedLabelColor = ClienttaPrimary
                     )
                 )
@@ -124,8 +131,10 @@ fun LoginScreen(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = ClienttaPrimary,
+                        unfocusedBorderColor = ClienttaBorderGray,
                         focusedLabelColor = ClienttaPrimary
                     )
                 )
@@ -149,7 +158,7 @@ fun LoginScreen(
                     colors = ButtonDefaults.buttonColors(containerColor = ClienttaPrimary),
                     shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text("Entrar", fontSize = 16.sp, color = MaterialTheme.colorScheme.onPrimary)
+                    Text("Entrar", fontSize = 16.sp, color = ClienttaWhite)
                 }
 
                 Spacer(modifier = Modifier.height(12.dp))
@@ -161,3 +170,4 @@ fun LoginScreen(
         }
     }
 }
+

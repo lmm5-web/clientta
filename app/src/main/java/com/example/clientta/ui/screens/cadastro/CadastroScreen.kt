@@ -71,7 +71,7 @@ fun CadastroScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(ClienttaWhite)
+                .background(com.example.clientta.ui.theme.ClienttaBackground)
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 20.dp, vertical = 16.dp)
         ) {

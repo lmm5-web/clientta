@@ -13,21 +13,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -39,11 +32,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.clientta.R
 import com.example.clientta.data.entity.Agendamento
+import com.example.clientta.ui.components.HeaderGlobal
+import com.example.clientta.ui.theme.ClienttaBackground
 import com.example.clientta.ui.theme.ClienttaPrimary
+import com.example.clientta.ui.theme.ClienttaTextPrimary
+import com.example.clientta.ui.theme.ClienttaTextSecondary
+import com.example.clientta.ui.theme.ClienttaWhite
 import com.example.clientta.viewmodel.AgendamentoViewModel
 import com.example.clientta.viewmodel.TratamentoViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AgendamentosListScreen(
     agendamentoViewModel: AgendamentoViewModel,
@@ -55,18 +52,9 @@ fun AgendamentosListScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Meus Agendamentos", color = MaterialTheme.colorScheme.onPrimary) },
-                navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Voltar",
-                            tint = MaterialTheme.colorScheme.onPrimary
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = ClienttaPrimary)
+            HeaderGlobal(
+                title = "Meus Agendamentos",
+                onBackClick = onNavigateBack
             )
         }
     ) { innerPadding ->
@@ -74,7 +62,7 @@ fun AgendamentosListScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(MaterialTheme.colorScheme.background)
+                .background(ClienttaBackground)
                 .padding(16.dp)
         ) {
             if (agendamentos.isEmpty()) {
@@ -84,7 +72,7 @@ fun AgendamentosListScreen(
                 ) {
                     Text(
                         text = stringResource(id = R.string.empty_agendamentos),
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                        color = ClienttaTextSecondary
                     )
                 }
             } else {
@@ -118,7 +106,7 @@ fun AgendamentoCard(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        colors = CardDefaults.cardColors(containerColor = ClienttaWhite),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
@@ -141,7 +129,7 @@ fun AgendamentoCard(
                     fontSize = 13.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = when (agendamento.status) {
-                        Agendamento.STATUS_CONCLUIDO -> MaterialTheme.colorScheme.primary
+                        Agendamento.STATUS_CONCLUIDO -> ClienttaPrimary
                         Agendamento.STATUS_CANCELADO -> MaterialTheme.colorScheme.error
                         else -> ClienttaPrimary
                     }
@@ -153,7 +141,7 @@ fun AgendamentoCard(
             Text(
                 text = "Data: ${agendamento.data} às ${agendamento.horario}",
                 fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f)
+                color = ClienttaTextSecondary
             )
 
             if (agendamento.status == Agendamento.STATUS_AGENDADO) {
@@ -168,7 +156,7 @@ fun AgendamentoCard(
                         modifier = Modifier.weight(1f),
                         colors = ButtonDefaults.buttonColors(containerColor = ClienttaPrimary)
                     ) {
-                        Text("Pré-atendimento", fontSize = 12.sp)
+                        Text("Pré-atendimento", fontSize = 12.sp, color = ClienttaWhite)
                     }
 
                     OutlinedButton(
@@ -182,3 +170,4 @@ fun AgendamentoCard(
         }
     }
 }
+

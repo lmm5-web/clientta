@@ -7,11 +7,11 @@ import androidx.compose.runtime.Composable
 private val LightColorScheme = lightColorScheme(
     primary = ClienttaPrimary,
     onPrimary = ClienttaWhite,
-    primaryContainer = ClienttaPrimaryLight,
+    primaryContainer = ClienttaComplementary2,
     onPrimaryContainer = ClienttaPrimaryDark,
     secondary = ClienttaPrimary,
-    tertiary = ClienttaPrimaryLight,
-    background = ClienttaWhite,
+    tertiary = ClienttaComplementary,
+    background = ClienttaBackground,
     surface = ClienttaWhite,
     onSurface = ClienttaTextPrimary,
     outline = ClienttaBorderGray
@@ -27,3 +27,4 @@ fun ClienttaTheme(
         content = content
     )
 }
+

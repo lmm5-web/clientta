@@ -14,18 +14,23 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.clientta.ui.theme.ClienttaComplementary2
 import com.example.clientta.ui.theme.ClienttaPrimary
-import com.example.clientta.ui.theme.ClienttaPrimaryLight
+import com.example.clientta.ui.theme.ClienttaTextPrimary
 import com.example.clientta.ui.theme.ClienttaWhite
 
 @Composable
 fun HeaderGlobal(
     modifier: Modifier = Modifier,
+    title: String? = null,
     onBackClick: (() -> Unit)? = null
 ) {
     Row(
@@ -50,12 +55,23 @@ fun HeaderGlobal(
             Box(modifier = Modifier.size(48.dp))
         }
 
-        // Ícone do Logo: Círculo roxo claro (#E8E0F5) com flor/símbolo roxo (#673AB7)
+        if (title != null) {
+            Text(
+                text = title,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = ClienttaTextPrimary
+            )
+        } else {
+            Box(modifier = Modifier.weight(1f))
+        }
+
+        // Ícone do Logo: Círculo roxo claro (#E8DFF0) com flor/símbolo roxo (#8F7AAE)
         Box(
             modifier = Modifier
                 .size(40.dp)
                 .clip(CircleShape)
-                .background(ClienttaPrimaryLight),
+                .background(ClienttaComplementary2),
             contentAlignment = Alignment.Center
         ) {
             Icon(
@@ -67,3 +83,4 @@ fun HeaderGlobal(
         }
     }
 }
+

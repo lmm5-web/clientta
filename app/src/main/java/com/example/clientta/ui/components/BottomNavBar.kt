@@ -14,8 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.sp
+import com.example.clientta.ui.theme.ClienttaComplementary2
 import com.example.clientta.ui.theme.ClienttaPrimary
-import com.example.clientta.ui.theme.ClienttaPrimaryLight
+import com.example.clientta.ui.theme.ClienttaTextSecondary
 import com.example.clientta.ui.theme.ClienttaWhite
 
 sealed class BottomNavItem(
@@ -55,20 +56,21 @@ fun BottomNavBar(
                     Icon(
                         imageVector = item.icon,
                         contentDescription = item.title,
-                        tint = ClienttaPrimary
+                        tint = if (selected) ClienttaPrimary else ClienttaTextSecondary
                     )
                 },
                 label = {
                     Text(
                         text = item.title,
                         fontSize = 12.sp,
-                        color = ClienttaPrimary
+                        color = if (selected) ClienttaPrimary else ClienttaTextSecondary
                     )
                 },
                 colors = NavigationBarItemDefaults.colors(
-                    indicatorColor = ClienttaPrimaryLight
+                    indicatorColor = ClienttaComplementary2
                 )
             )
         }
     }
 }
+

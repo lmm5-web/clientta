@@ -40,7 +40,11 @@ import androidx.compose.ui.unit.sp
 import com.example.clientta.R
 import com.example.clientta.data.entity.Agendamento
 import com.example.clientta.data.session.UserSession
+import com.example.clientta.ui.theme.ClienttaBackground
 import com.example.clientta.ui.theme.ClienttaPrimary
+import com.example.clientta.ui.theme.ClienttaTextPrimary
+import com.example.clientta.ui.theme.ClienttaTextSecondary
+import com.example.clientta.ui.theme.ClienttaWhite
 import com.example.clientta.viewmodel.ProfissionalViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -55,7 +59,7 @@ fun AreaProfissionalScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Área Profissional", color = MaterialTheme.colorScheme.onPrimary) },
+                title = { Text("Área Profissional", color = ClienttaWhite, fontWeight = FontWeight.Bold) },
                 actions = {
                     IconButton(onClick = {
                         UserSession.logout()
@@ -64,7 +68,7 @@ fun AreaProfissionalScreen(
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ExitToApp,
                             contentDescription = "Sair",
-                            tint = MaterialTheme.colorScheme.onPrimary
+                            tint = ClienttaWhite
                         )
                     }
                 },
@@ -76,7 +80,7 @@ fun AreaProfissionalScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(MaterialTheme.colorScheme.background)
+                .background(ClienttaBackground)
                 .padding(16.dp)
         ) {
             Text(
@@ -89,7 +93,7 @@ fun AreaProfissionalScreen(
             Text(
                 text = "Especialidade: ${profissional?.especialidade ?: ""}",
                 fontSize = 13.sp,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                color = ClienttaTextSecondary,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
@@ -97,7 +101,7 @@ fun AreaProfissionalScreen(
                 text = "Agenda de Atendimentos",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onSurface,
+                color = ClienttaTextPrimary,
                 modifier = Modifier.padding(bottom = 12.dp)
             )
 
@@ -108,7 +112,7 @@ fun AreaProfissionalScreen(
                 ) {
                     Text(
                         text = stringResource(id = R.string.empty_agendamentos),
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                        color = ClienttaTextSecondary
                     )
                 }
             } else {
@@ -144,7 +148,7 @@ fun ProfissionalAgendamentoCard(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        colors = CardDefaults.cardColors(containerColor = ClienttaWhite),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
@@ -166,7 +170,7 @@ fun ProfissionalAgendamentoCard(
                     fontSize = 12.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = when (agendamento.status) {
-                        Agendamento.STATUS_CONCLUIDO -> MaterialTheme.colorScheme.primary
+                        Agendamento.STATUS_CONCLUIDO -> ClienttaPrimary
                         Agendamento.STATUS_CANCELADO -> MaterialTheme.colorScheme.error
                         else -> ClienttaPrimary
                     }
@@ -176,13 +180,14 @@ fun ProfissionalAgendamentoCard(
             Text(
                 text = "Tratamento: ${tratamento?.nome ?: ""}",
                 fontSize = 14.sp,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Medium,
+                color = ClienttaTextPrimary
             )
 
             Text(
                 text = "Data/Horário: ${agendamento.data} às ${agendamento.horario}",
                 fontSize = 13.sp,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                color = ClienttaTextSecondary
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -197,13 +202,13 @@ fun ProfissionalAgendamentoCard(
                 Text(
                     text = preAtendimento!!.respostas,
                     fontSize = 12.sp,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f)
+                    color = ClienttaTextPrimary
                 )
             } else {
                 Text(
                     text = "Pré-atendimento ainda não preenchido.",
                     fontSize = 12.sp,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                    color = ClienttaTextSecondary
                 )
             }
 
@@ -219,7 +224,7 @@ fun ProfissionalAgendamentoCard(
                         modifier = Modifier.weight(1f),
                         colors = ButtonDefaults.buttonColors(containerColor = ClienttaPrimary)
                     ) {
-                        Text("Concluir", fontSize = 12.sp)
+                        Text("Concluir", fontSize = 12.sp, color = ClienttaWhite)
                     }
 
                     OutlinedButton(
@@ -233,3 +238,4 @@ fun ProfissionalAgendamentoCard(
         }
     }
 }
+

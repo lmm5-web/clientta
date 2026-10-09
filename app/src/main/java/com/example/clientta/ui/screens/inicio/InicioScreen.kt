@@ -187,7 +187,7 @@ fun InicioScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = ClienttaPrimaryLight)
+                colors = CardDefaults.cardColors(containerColor = com.example.clientta.ui.theme.ClienttaComplementary)
             ) {
                 Column(
                     modifier = Modifier.padding(20.dp)

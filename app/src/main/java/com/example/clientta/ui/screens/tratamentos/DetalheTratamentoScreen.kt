@@ -9,33 +9,28 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.clientta.ui.components.HeaderGlobal
+import com.example.clientta.ui.theme.ClienttaBackground
 import com.example.clientta.ui.theme.ClienttaPrimary
+import com.example.clientta.ui.theme.ClienttaTextPrimary
+import com.example.clientta.ui.theme.ClienttaTextSecondary
+import com.example.clientta.ui.theme.ClienttaWhite
 import com.example.clientta.viewmodel.TratamentoViewModel
 import java.util.Locale
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetalheTratamentoScreen(
     tratamentoId: Long,
@@ -48,18 +43,9 @@ fun DetalheTratamentoScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(tratamento?.nome ?: "Detalhes", color = MaterialTheme.colorScheme.onPrimary) },
-                navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Voltar",
-                            tint = MaterialTheme.colorScheme.onPrimary
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = ClienttaPrimary)
+            HeaderGlobal(
+                title = "Detalhes do Tratamento",
+                onBackClick = onNavigateBack
             )
         }
     ) { innerPadding ->
@@ -67,14 +53,14 @@ fun DetalheTratamentoScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(MaterialTheme.colorScheme.background)
+                .background(ClienttaBackground)
                 .padding(16.dp)
         ) {
             if (tratamento != null) {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    colors = CardDefaults.cardColors(containerColor = ClienttaWhite),
                     elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
                 ) {
                     Column(
@@ -92,7 +78,7 @@ fun DetalheTratamentoScreen(
                         Text(
                             text = tratamento!!.descricao,
                             fontSize = 15.sp,
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
+                            color = ClienttaTextSecondary,
                             lineHeight = 22.sp
                         )
 
@@ -102,7 +88,7 @@ fun DetalheTratamentoScreen(
                             text = "Preço: ${String.format(Locale.getDefault(), "R$ %.2f", tratamento!!.preco)}",
                             fontSize = 18.sp,
                             fontWeight = FontWeight.SemiBold,
-                            color = MaterialTheme.colorScheme.onSurface
+                            color = ClienttaTextPrimary
                         )
 
                         Spacer(modifier = Modifier.height(6.dp))
@@ -123,7 +109,7 @@ fun DetalheTratamentoScreen(
                             colors = ButtonDefaults.buttonColors(containerColor = ClienttaPrimary),
                             shape = RoundedCornerShape(12.dp)
                         ) {
-                            Text("Agendar Atendimento", fontSize = 16.sp, color = MaterialTheme.colorScheme.onPrimary)
+                            Text("Agendar Atendimento", fontSize = 16.sp, color = ClienttaWhite)
                         }
                     }
                 }
@@ -131,3 +117,4 @@ fun DetalheTratamentoScreen(
         }
     }
 }
+

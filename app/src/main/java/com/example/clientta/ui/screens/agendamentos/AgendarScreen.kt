@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,38 +13,35 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.clientta.ui.components.HeaderGlobal
+import com.example.clientta.ui.theme.ClienttaBackground
+import com.example.clientta.ui.theme.ClienttaBorderGray
+import com.example.clientta.ui.theme.ClienttaComplementary2
 import com.example.clientta.ui.theme.ClienttaPrimary
+import com.example.clientta.ui.theme.ClienttaTextPrimary
+import com.example.clientta.ui.theme.ClienttaWhite
 import com.example.clientta.viewmodel.AgendamentoViewModel
 import com.example.clientta.viewmodel.TratamentoViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AgendarScreen(
     tratamentoId: Long,
@@ -73,18 +69,9 @@ fun AgendarScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Agendar Horário", color = MaterialTheme.colorScheme.onPrimary) },
-                navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Voltar",
-                            tint = MaterialTheme.colorScheme.onPrimary
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = ClienttaPrimary)
+            HeaderGlobal(
+                title = "Agendar Horário",
+                onBackClick = onNavigateBack
             )
         }
     ) { innerPadding ->
@@ -92,14 +79,14 @@ fun AgendarScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(MaterialTheme.colorScheme.background)
+                .background(ClienttaBackground)
                 .padding(16.dp)
         ) {
             if (tratamento != null) {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    colors = CardDefaults.cardColors(containerColor = ClienttaWhite),
                     elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
                 ) {
                     Column(
@@ -123,7 +110,12 @@ fun AgendarScreen(
                             label = { Text("Data (DD/MM/AAAA) *") },
                             singleLine = true,
                             modifier = Modifier.fillMaxWidth(),
-                            colors = OutlinedTextFieldDefaults.colors(focusedBorderColor = ClienttaPrimary)
+                            shape = RoundedCornerShape(12.dp),
+                            colors = OutlinedTextFieldDefaults.colors(
+                                focusedBorderColor = ClienttaPrimary,
+                                unfocusedBorderColor = ClienttaBorderGray,
+                                focusedLabelColor = ClienttaPrimary
+                            )
                         )
 
                         Spacer(modifier = Modifier.height(20.dp))
@@ -132,7 +124,7 @@ fun AgendarScreen(
                             text = "Horários Disponíveis:",
                             fontSize = 15.sp,
                             fontWeight = FontWeight.SemiBold,
-                            color = MaterialTheme.colorScheme.onSurface
+                            color = ClienttaTextPrimary
                         )
 
                         Spacer(modifier = Modifier.height(10.dp))
@@ -153,7 +145,8 @@ fun AgendarScreen(
                                     label = { Text(slot) },
                                     colors = FilterChipDefaults.filterChipColors(
                                         selectedContainerColor = ClienttaPrimary,
-                                        selectedLabelColor = MaterialTheme.colorScheme.onPrimary
+                                        selectedLabelColor = ClienttaWhite,
+                                        containerColor = ClienttaComplementary2
                                     )
                                 )
                             }
@@ -178,7 +171,7 @@ fun AgendarScreen(
                             colors = ButtonDefaults.buttonColors(containerColor = ClienttaPrimary),
                             shape = RoundedCornerShape(12.dp)
                         ) {
-                            Text("Confirmar Agendamento", fontSize = 16.sp, color = MaterialTheme.colorScheme.onPrimary)
+                            Text("Confirmar Agendamento", fontSize = 16.sp, color = ClienttaWhite)
                         }
                     }
                 }
@@ -186,3 +179,4 @@ fun AgendarScreen(
         }
     }
 }
+
