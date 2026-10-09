@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!-- Header Global (Seta roxa + Logo) -->
+    <include
+        android:id="@+id/header_global"
+        layout="@layout/layout_header_global" />
+
+    <!-- Conteúdo do Formulário com Scroll -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_medium">
+
+            <!-- Título da Tela -->
+            <TextView
+                android:id="@+id/tv_titulo_cadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Complete seu perfil"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_header"
+                android:textStyle="bold" />
+
+            <!-- Subtítulo Explicativo -->
+            <TextView
+                android:id="@+id/tv_subtitulo_cadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:text="Informe seus dados pessoais para finalizar o cadastro na clínica"
+                android:textColor="@color/text_secondary"
+                android:textSize="@dimen/text_medium" />
+
+            <!-- Input: Nome Completo -->
+            <EditText
+                android:id="@+id/et_nome"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:background="@drawable/bg_input_field"
+                android:hint="Nome Completo *"
+                android:inputType="textPersonName"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:textSize="@dimen/text_medium" />
+
+            <!-- Input: CPF -->
+            <EditText
+                android:id="@+id/et_cpf"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:background="@drawable/bg_input_field"
+                android:hint="CPF *"
+                android:inputType="number"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:textSize="@dimen/text_medium" />
+
+            <!-- Input: Data de Nascimento -->
+            <EditText
+                android:id="@+id/et_data_nascimento"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:background="@drawable/bg_input_field"
+                android:hint="Data de Nascimento (DD/MM/AAAA) *"
+                android:inputType="date"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:textSize="@dimen/text_medium" />
+
+            <!-- Input: Telefone -->
+            <EditText
+                android:id="@+id/et_telefone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:background="@drawable/bg_input_field"
+                android:hint="Telefone / WhatsApp *"
+                android:inputType="phone"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:textSize="@dimen/text_medium" />
+
+            <!-- Input: E-mail -->
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:background="@drawable/bg_input_field"
+                android:hint="E-mail *"
+                android:inputType="textEmailAddress"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:textSize="@dimen/text_medium" />
+
+            <!-- Input: Senha -->
+            <EditText
+                android:id="@+id/et_senha"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:background="@drawable/bg_input_field"
+                android:hint="Senha *"
+                android:inputType="textPassword"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:textSize="@dimen/text_medium" />
+
+            <!-- Termos de Uso -->
+            <CheckBox
+                android:id="@+id/cb_termos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:text="Li e concordo com os termos de uso e política de privacidade"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_small" />
+
+            <!-- Botão Sólido Finalizar (#673AB7) -->
+            <android.widget.Button
+                android:id="@+id/btn_finalizar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:background="@drawable/bg_button_primary"
+                android:text="Finalizar"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_large"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

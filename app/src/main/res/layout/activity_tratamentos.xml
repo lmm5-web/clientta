@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    android:orientation="vertical">
+
+    <!-- Header Global (Seta roxa + Logo) -->
+    <include
+        android:id="@+id/header_global"
+        layout="@layout/layout_header_global" />
+
+    <!-- Conteúdo Principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/spacing_medium"
+        android:paddingTop="@dimen/spacing_medium">
+
+        <!-- Título e Subtítulo -->
+        <TextView
+            android:id="@+id/tv_titulo_tratamentos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tratamentos"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_header"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_subtitulo_tratamentos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:text="Escolha o procedimento perfeito para você"
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/text_medium" />
+
+        <!-- Filtro de Categorias (Chips) -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Chip Selecionado (Faciais) -->
+                <TextView
+                    android:id="@+id/chip_faciais"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:background="@drawable/bg_chip_selected"
+                    android:gravity="center"
+                    android:paddingHorizontal="16dp"
+                    android:text="Faciais"
+                    android:textColor="@color/purple_primary"
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold" />
+
+                <!-- Chip Não Selecionado (Epilação) -->
+                <TextView
+                    android:id="@+id/chip_epilacao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:gravity="center"
+                    android:paddingHorizontal="16dp"
+                    android:text="Epilação"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/text_medium" />
+
+                <!-- Chip Não Selecionado (Corporais) -->
+                <TextView
+                    android:id="@+id/chip_corporais"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:gravity="center"
+                    android:paddingHorizontal="16dp"
+                    android:text="Corporais"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/text_medium" />
+
+                <!-- Chip Não Selecionado (Massagens) -->
+                <TextView
+                    android:id="@+id/chip_massagens"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:gravity="center"
+                    android:paddingHorizontal="16dp"
+                    android:text="Massagens"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/text_medium" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Lista de Cards de Tratamento -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_tratamentos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/spacing_medium"
+            tools:listitem="@layout/item_card_tratamento" />
+
+    </LinearLayout>
+
+</LinearLayout>
