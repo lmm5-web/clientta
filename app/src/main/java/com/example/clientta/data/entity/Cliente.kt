@@ -3,6 +3,7 @@ package com.example.clientta.data.entity
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import java.util.Calendar
 
 /**
  * Entidade que representa um cliente cadastrado no aplicativo Clientta.
@@ -32,6 +33,20 @@ data class Cliente(
             val digitos = cpf.replace("\\D".toRegex(), "")
             return if (digitos.length == 11) {
                 "${digitos.substring(0, 3)}.***.***-${digitos.substring(9)}"
+            } else {
+                cpf
+            }
+        }
+
+    /**
+     * Retorna o CPF completo formatado no padrão 000.000.000-00 se contiver 11 dígitos.
+     */
+    @get:Ignore
+    val cpfFormatado: String
+        get() {
+            val digitos = cpf.replace("\\D".toRegex(), "")
+            return if (digitos.length == 11) {
+                "${digitos.substring(0, 3)}.${digitos.substring(3, 6)}.${digitos.substring(6, 9)}-${digitos.substring(9)}"
             } else {
                 cpf
             }
@@ -71,4 +86,48 @@ data class Cliente(
                 else -> "C"
             }
         }
+
+    /**
+     * Retorna a idade do cliente calculada a partir da data de nascimento em anos.
+     * Suporta formatos DD/MM/AAAA e AAAA-MM-DD.
+     */
+    @get:Ignore
+    val idade: Int?
+        get() {
+            return try {
+                val limpo = dataNascimento.trim()
+                val partes = if (limpo.contains("/")) limpo.split("/") else limpo.split("-")
+                if (partes.size == 3) {
+                    val (dia, mes, ano) = if (partes[0].length == 4) {
+                        Triple(partes[2].toInt(), partes[1].toInt(), partes[0].toInt())
+                    } else {
+                        Triple(partes[0].toInt(), partes[1].toInt(), partes[2].toInt())
+                    }
+                    val hoje = Calendar.getInstance()
+                    var idadeCalculada = hoje[Calendar.YEAR] - ano
+                    val mesAtual = hoje[Calendar.MONTH] + 1
+                    val diaAtual = hoje[Calendar.DAY_OF_MONTH]
+                    if (mesAtual < mes || (mesAtual == mes && diaAtual < dia)) {
+                        idadeCalculada--
+                    }
+                    if (idadeCalculada in 0..120) idadeCalculada else null
+                } else null
+            } catch (_: Exception) {
+                null
+            }
+        }
+
+    /**
+     * Retorna a idade do cliente formatada para exibição em fichas e perfil (ex: "28 anos").
+     */
+    @get:Ignore
+    val idadeFormatada: String
+        get() = idade?.let { "$it anos" } ?: "Idade não informada"
+
+    /**
+     * Indica se o perfil do cliente possui informações completas (endereço e observações).
+     */
+    @get:Ignore
+    val perfilCompleto: Boolean
+        get() = !endereco.isNullOrBlank() && !observacoes.isNullOrBlank()
 }
