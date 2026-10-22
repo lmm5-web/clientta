@@ -16,6 +16,11 @@ data class Profissional(
     val telefone: String,
     val especialidade: String,
     val senha: String,
+    val nomeClinica: String? = null,
+    val endereco: String? = null,
+    val descricao: String? = null,
+    val registroProfissional: String? = null,
+    val ativo: Boolean = true,
 ) {
     /**
      * Retorna o primeiro nome do profissional para saudações personalizadas na UI (ex: "Ana").
