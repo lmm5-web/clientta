@@ -7,7 +7,11 @@ import com.example.clientta.data.repository.AgendamentoRepository
 import com.example.clientta.data.repository.ClienteRepository
 import com.example.clientta.data.repository.PreAtendimentoRepository
 import com.example.clientta.data.repository.TratamentoRepository
+import com.example.clientta.data.repository.ProfissionalRepository
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -15,8 +19,21 @@ class ProfissionalViewModel(
     private val agendamentoRepository: AgendamentoRepository,
     private val clienteRepository: ClienteRepository,
     private val tratamentoRepository: TratamentoRepository,
-    private val preAtendimentoRepository: PreAtendimentoRepository
+    private val preAtendimentoRepository: PreAtendimentoRepository,
+    private val profissionalRepository: ProfissionalRepository? = null
 ) : ViewModel() {
+
+    private val _isCarregando = MutableStateFlow(false)
+    val isCarregando: StateFlow<Boolean> = _isCarregando.asStateFlow()
+
+    fun sincronizarEquipe() {
+        val repo = profissionalRepository ?: return
+        viewModelScope.launch {
+            _isCarregando.value = true
+            repo.sincronizarProfissionaisRemotos()
+            _isCarregando.value = false
+        }
+    }
 
     val todosAgendamentos = agendamentoRepository.allAgendamentos
         .stateIn(

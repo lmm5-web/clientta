@@ -20,6 +20,11 @@ data class Cliente(
     val telefone: String,
     val email: String,
     val senha: String,
+    val cep: String? = null,
+    val logradouro: String? = null,
+    val bairro: String? = null,
+    val cidade: String? = null,
+    val estado: String? = null,
     val endereco: String? = null,
     val observacoes: String? = null,
 ) {
@@ -125,9 +130,41 @@ data class Cliente(
         get() = idade?.let { "$it anos" } ?: "Idade não informada"
 
     /**
-     * Indica se o perfil do cliente possui informações completas (endereço e observações).
+     * Retorna o CEP formatado no padrão 00000-000 se contiver 8 dígitos.
+     */
+    @get:Ignore
+    val cepFormatado: String?
+        get() {
+            val digitos = cep?.replace("\\D".toRegex(), "") ?: return null
+            return if (digitos.length == 8) {
+                "${digitos.substring(0, 5)}-${digitos.substring(5)}"
+            } else {
+                cep
+            }
+        }
+
+    /**
+     * Retorna o endereço completo estruturado montado a partir dos campos individuais ou do campo endereco.
+     */
+    @get:Ignore
+    val enderecoCompleto: String
+        get() {
+            val partes = listOfNotNull(
+                logradouro.takeIf { !it.isNullOrBlank() },
+                bairro.takeIf { !it.isNullOrBlank() },
+                cidade?.let { c -> estado?.let { e -> "$c - $e" } ?: c } ?: estado
+            )
+            return when {
+                partes.isNotEmpty() -> partes.joinToString(", ")
+                !endereco.isNullOrBlank() -> endereco
+                else -> "Endereço não informado"
+            }
+        }
+
+    /**
+     * Indica se o perfil do cliente possui informações completas (endereço/CEP e observações).
      */
     @get:Ignore
     val perfilCompleto: Boolean
-        get() = !endereco.isNullOrBlank() && !observacoes.isNullOrBlank()
+        get() = (!endereco.isNullOrBlank() || !cep.isNullOrBlank()) && !observacoes.isNullOrBlank()
 }

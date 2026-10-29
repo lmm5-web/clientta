@@ -49,6 +49,7 @@ abstract class ClienttaDatabase : RoomDatabase() {
                     ClienttaDatabase::class.java,
                     "clientta_database"
                 )
+                .fallbackToDestructiveMigration()
                 .addCallback(DatabaseCallback(context.applicationContext))
                 .build()
                 INSTANCE = instance

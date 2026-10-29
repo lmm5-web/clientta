@@ -35,4 +35,10 @@ interface ClienteDao {
 
     @Query("SELECT * FROM clientes WHERE email = :email AND senha = :senha LIMIT 1")
     suspend fun login(email: String, senha: String): Cliente?
+
+    @Query("SELECT * FROM clientes WHERE cep = :cep")
+    fun getByCep(cep: String): Flow<List<Cliente>>
+
+    @Query("SELECT * FROM clientes WHERE nome LIKE '%' || :query || '%' OR cpf LIKE '%' || :query || '%' OR email LIKE '%' || :query || '%' ORDER BY nome ASC")
+    fun buscarClientes(query: String): Flow<List<Cliente>>
 }
