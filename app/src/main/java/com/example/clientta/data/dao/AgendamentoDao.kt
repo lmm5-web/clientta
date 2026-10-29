@@ -32,4 +32,13 @@ interface AgendamentoDao {
 
     @Query("SELECT * FROM agendamentos WHERE data = :data AND horario = :horario AND status != 'Cancelado' LIMIT 1")
     suspend fun getByDataEHorario(data: String, horario: String): Agendamento?
+
+    @Query("SELECT * FROM agendamentos WHERE status = :status ORDER BY data ASC, horario ASC")
+    fun getByStatus(status: String): Flow<List<Agendamento>>
+
+    @Query("SELECT * FROM agendamentos WHERE data = :data ORDER BY horario ASC")
+    fun getByData(data: String): Flow<List<Agendamento>>
+
+    @Query("UPDATE agendamentos SET status = :novoStatus WHERE id = :id")
+    suspend fun atualizarStatus(id: Long, novoStatus: String)
 }
