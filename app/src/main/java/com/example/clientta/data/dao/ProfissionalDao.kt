@@ -32,4 +32,13 @@ interface ProfissionalDao {
 
     @Query("SELECT * FROM profissionais WHERE email = :email AND senha = :senha LIMIT 1")
     suspend fun login(email: String, senha: String): Profissional?
+
+    @Query("SELECT * FROM profissionais WHERE ativo = 1 ORDER BY nome ASC")
+    fun getAtivos(): Flow<List<Profissional>>
+
+    @Query("SELECT * FROM profissionais WHERE especialidade LIKE '%' || :especialidade || '%' AND ativo = 1 ORDER BY nome ASC")
+    fun getByEspecialidade(especialidade: String): Flow<List<Profissional>>
+
+    @Query("SELECT * FROM profissionais WHERE nome LIKE '%' || :query || '%' OR especialidade LIKE '%' || :query || '%' ORDER BY nome ASC")
+    fun buscarProfissionais(query: String): Flow<List<Profissional>>
 }
