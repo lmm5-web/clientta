@@ -17,7 +17,15 @@ class PerfilViewModel(
 
     var telefoneState = MutableStateFlow("")
     var emailState = MutableStateFlow("")
+    var cepState = MutableStateFlow("")
+    var logradouroState = MutableStateFlow("")
+    var bairroState = MutableStateFlow("")
+    var cidadeState = MutableStateFlow("")
+    var estadoState = MutableStateFlow("")
     var enderecoState = MutableStateFlow("")
+
+    private val _isBuscandoCep = MutableStateFlow(false)
+    val isBuscandoCep: StateFlow<Boolean> = _isBuscandoCep.asStateFlow()
 
     private val _successMessage = MutableStateFlow<String?>(null)
     val successMessage: StateFlow<String?> = _successMessage.asStateFlow()
@@ -29,7 +37,37 @@ class PerfilViewModel(
         currentCliente.value?.let { cliente ->
             telefoneState.value = cliente.telefone
             emailState.value = cliente.email
-            enderecoState.value = cliente.endereco ?: ""
+            cepState.value = cliente.cep ?: ""
+            logradouroState.value = cliente.logradouro ?: ""
+            bairroState.value = cliente.bairro ?: ""
+            cidadeState.value = cliente.cidade ?: ""
+            estadoState.value = cliente.estado ?: ""
+            enderecoState.value = cliente.endereco ?: cliente.enderecoCompleto
+        }
+    }
+
+    fun buscarCep() {
+        val cep = cepState.value.trim()
+        val cepNumerico = cep.replace("\\D".toRegex(), "")
+        if (cepNumerico.length != 8) {
+            _errorMessage.value = "Informe um CEP válido com 8 dígitos."
+            return
+        }
+
+        viewModelScope.launch {
+            _isBuscandoCep.value = true
+            _errorMessage.value = null
+            val result = clienteRepository.buscarEnderecoPorCep(cep)
+            result.onSuccess { viaCep ->
+                logradouroState.value = viaCep.logradouro ?: ""
+                bairroState.value = viaCep.bairro ?: ""
+                cidadeState.value = viaCep.localidade ?: ""
+                estadoState.value = viaCep.uf ?: ""
+                enderecoState.value = viaCep.toEnderecoCompleto()
+            }.onFailure { exception ->
+                _errorMessage.value = exception.message ?: "Erro ao buscar CEP."
+            }
+            _isBuscandoCep.value = false
         }
     }
 
@@ -47,6 +85,11 @@ class PerfilViewModel(
         val clienteAtualizado = cliente.copy(
             telefone = novoTelefone,
             email = novoEmail,
+            cep = cepState.value.ifBlank { null },
+            logradouro = logradouroState.value.ifBlank { null },
+            bairro = bairroState.value.ifBlank { null },
+            cidade = cidadeState.value.ifBlank { null },
+            estado = estadoState.value.ifBlank { null },
             endereco = novoEndereco.ifBlank { null }
         )
 

@@ -20,14 +20,47 @@ class CadastroViewModel(
     var telefoneState = MutableStateFlow("")
     var emailState = MutableStateFlow("")
     var senhaState = MutableStateFlow("")
+    var cepState = MutableStateFlow("")
+    var logradouroState = MutableStateFlow("")
+    var bairroState = MutableStateFlow("")
+    var cidadeState = MutableStateFlow("")
+    var estadoState = MutableStateFlow("")
     var enderecoState = MutableStateFlow("")
     var observacoesState = MutableStateFlow("")
+
+    private val _isBuscandoCep = MutableStateFlow(false)
+    val isBuscandoCep: StateFlow<Boolean> = _isBuscandoCep.asStateFlow()
 
     private val _errorMessage = MutableStateFlow<String?>(null)
     val errorMessage: StateFlow<String?> = _errorMessage.asStateFlow()
 
     private val _cadastroSuccess = MutableStateFlow(false)
     val cadastroSuccess: StateFlow<Boolean> = _cadastroSuccess.asStateFlow()
+
+    fun buscarCep() {
+        val cep = cepState.value.trim()
+        val cepNumerico = cep.replace("\\D".toRegex(), "")
+        if (cepNumerico.length != 8) {
+            _errorMessage.value = "Informe um CEP válido com 8 dígitos."
+            return
+        }
+
+        viewModelScope.launch {
+            _isBuscandoCep.value = true
+            _errorMessage.value = null
+            val result = clienteRepository.buscarEnderecoPorCep(cep)
+            result.onSuccess { viaCep ->
+                logradouroState.value = viaCep.logradouro ?: ""
+                bairroState.value = viaCep.bairro ?: ""
+                cidadeState.value = viaCep.localidade ?: ""
+                estadoState.value = viaCep.uf ?: ""
+                enderecoState.value = viaCep.toEnderecoCompleto()
+            }.onFailure { exception ->
+                _errorMessage.value = exception.message ?: "Erro ao buscar CEP."
+            }
+            _isBuscandoCep.value = false
+        }
+    }
 
     fun cadastrar() {
         val nome = nomeState.value.trim()
@@ -56,6 +89,11 @@ class CadastroViewModel(
             telefone = telefone,
             email = email,
             senha = senha,
+            cep = cepState.value.ifBlank { null },
+            logradouro = logradouroState.value.ifBlank { null },
+            bairro = bairroState.value.ifBlank { null },
+            cidade = cidadeState.value.ifBlank { null },
+            estado = estadoState.value.ifBlank { null },
             endereco = enderecoState.value.ifBlank { null },
             observacoes = observacoesState.value.ifBlank { null }
         )
