@@ -35,4 +35,10 @@ interface TratamentoDao {
 
     @Query("SELECT COUNT(*) FROM tratamentos")
     suspend fun getCount(): Int
+
+    @Query("SELECT * FROM tratamentos WHERE preco <= :precoMaximo AND ativo = 1 ORDER BY preco ASC")
+    fun getTratamentosPorPrecoMaximo(precoMaximo: Double): Flow<List<Tratamento>>
+
+    @Query("SELECT * FROM tratamentos WHERE nome LIKE '%' || :query || '%' OR descricao LIKE '%' || :query || '%' ORDER BY nome ASC")
+    fun buscarTratamentos(query: String): Flow<List<Tratamento>>
 }
