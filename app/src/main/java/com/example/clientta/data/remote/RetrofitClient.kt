@@ -1,5 +1,7 @@
 package com.example.clientta.data.remote
 
+import com.example.clientta.data.remote.api.AgendamentoApiService
+import com.example.clientta.data.remote.api.PreAtendimentoApiService
 import com.example.clientta.data.remote.api.ProfissionalApiService
 import com.example.clientta.data.remote.api.TratamentoApiService
 import com.example.clientta.data.remote.api.ViaCepApi
@@ -45,5 +47,27 @@ object RetrofitClient {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ProfissionalApiService::class.java)
+    }
+
+    /**
+     * Serviço para agendamento de consultas.
+     */
+    val agendamentoApiService: AgendamentoApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(CLIENTTA_API_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(AgendamentoApiService::class.java)
+    }
+
+    /**
+     * Serviço para formulário de pré-atendimento (anamnese).
+     */
+    val preAtendimentoApiService: PreAtendimentoApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(CLIENTTA_API_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(PreAtendimentoApiService::class.java)
     }
 }

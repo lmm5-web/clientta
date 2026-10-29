@@ -65,9 +65,10 @@ class AgendamentoViewModel(
 
         viewModelScope.launch {
             val result = agendamentoRepository.insert(novoAgendamento)
-            result.onSuccess {
+            result.onSuccess { id ->
                 _errorMessage.value = null
                 _agendamentoSuccess.value = true
+                agendamentoRepository.enviarAgendamentoParaServidor(novoAgendamento.copy(id = id))
             }.onFailure { ex ->
                 _errorMessage.value = ex.message ?: "Não foi possível realizar o agendamento."
             }

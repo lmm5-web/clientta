@@ -26,4 +26,7 @@ interface PreAtendimentoDao {
 
     @Query("SELECT * FROM pre_atendimentos WHERE id = :id LIMIT 1")
     fun getById(id: Long): Flow<PreAtendimento?>
+
+    @Query("SELECT EXISTS(SELECT 1 FROM pre_atendimentos WHERE agendamentoId = :agendamentoId AND termoAceito = 1)")
+    suspend fun hasPreAtendimentoConcluido(agendamentoId: Long): Boolean
 }

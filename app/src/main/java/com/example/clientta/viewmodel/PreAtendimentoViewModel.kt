@@ -55,9 +55,10 @@ class PreAtendimentoViewModel(
 
         viewModelScope.launch {
             val result = preAtendimentoRepository.insert(preAtendimento)
-            result.onSuccess {
+            result.onSuccess { id ->
                 _errorMessage.value = null
                 _salvarSuccess.value = true
+                preAtendimentoRepository.enviarPreAtendimentoRemoto(preAtendimento.copy(id = id))
             }.onFailure { ex ->
                 _errorMessage.value = ex.message ?: "Não foi possível salvar o pré-atendimento."
             }
