@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Clientta</string>
 
+    <!-- Estados da Tela (UiState) -->
+    <string name="lista_vazia">Você ainda não cadastrou nenhum tratamento. Toque no botão abaixo para começar.</string>
+    <string name="adicionar_primeiro">Adicionar o primeiro</string>
+    <string name="tentar_novamente">Tentar novamente</string>
+
     <!-- Estados Vazios -->
     <string name="empty_agendamentos">Você ainda não possui agendamentos.</string>
     <string name="empty_tratamentos">Nenhum tratamento disponível no momento.</string>
