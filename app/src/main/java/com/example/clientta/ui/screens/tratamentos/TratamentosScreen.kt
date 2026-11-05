@@ -1,3 +1,7 @@
+// Fronteira: Exibe a interface de tratamentos reativamente com base no UiState (Carregando, Vazio, Erro, Sucesso).
+// Motivo: Garante que a UI trate exaustivamente os 4 estados sem tela em branco e permita novas tentativas em caso de erro.
+// Se sumir: A tela não consegue renderizar estados de progresso, erro ou vazio adequadamente.
+
 package com.example.clientta.ui.screens.tratamentos
 
 import androidx.compose.foundation.background
@@ -21,8 +25,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Face
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -38,10 +45,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.clientta.R
 import com.example.clientta.data.entity.Tratamento
+import com.example.clientta.ui.UiState
 import com.example.clientta.ui.components.HeaderGlobal
 import com.example.clientta.ui.theme.ClienttaBorderGray
 import com.example.clientta.ui.theme.ClienttaPrimary
@@ -58,7 +67,7 @@ fun TratamentosScreen(
     onSelectTratamento: (Long) -> Unit,
     onNavigateBack: () -> Unit
 ) {
-    val tratamentos by viewModel.tratamentosAtivos.collectAsState()
+    val estado by viewModel.estado.collectAsState()
     var categoriaSelecionada by remember { mutableStateOf("Faciais") }
     val categorias = listOf("Faciais", "Epilação", "Corporais", "Massagens")
 
@@ -125,22 +134,31 @@ fun TratamentosScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            if (tratamentos.isEmpty()) {
-                Box(
+            when (val atual = estado) {
+                is UiState.Carregando -> Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        text = stringResource(id = R.string.empty_tratamentos),
-                        color = ClienttaTextSecondary
-                    )
+                    CircularProgressIndicator(color = ClienttaPrimary)
                 }
-            } else {
-                LazyColumn(
+
+                is UiState.Vazio -> MensagemCentral(
+                    texto = stringResource(R.string.lista_vazia),
+                    rotuloBotao = stringResource(R.string.adicionar_primeiro),
+                    aoClicar = { viewModel.carregar() }
+                )
+
+                is UiState.Erro -> MensagemCentral(
+                    texto = atual.mensagem,
+                    rotuloBotao = stringResource(R.string.tentar_novamente),
+                    aoClicar = { viewModel.carregar() }
+                )
+
+                is UiState.Sucesso -> LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                     modifier = Modifier.padding(bottom = 16.dp)
                 ) {
-                    items(tratamentos) { tratamento ->
+                    items(atual.itens) { tratamento ->
                         TratamentoItemCard(
                             tratamento = tratamento,
                             onClick = { onSelectTratamento(tratamento.id) }
@@ -148,6 +166,34 @@ fun TratamentosScreen(
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun MensagemCentral(
+    texto: String,
+    rotuloBotao: String,
+    aoClicar: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(32.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = texto,
+            textAlign = TextAlign.Center,
+            color = ClienttaTextSecondary
+        )
+        Spacer(Modifier.height(16.dp))
+        Button(
+            onClick = aoClicar,
+            colors = ButtonDefaults.buttonColors(containerColor = ClienttaPrimary)
+        ) {
+            Text(text = rotuloBotao, color = ClienttaWhite)
         }
     }
 }
