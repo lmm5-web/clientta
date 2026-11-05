@@ -10,9 +10,11 @@ import com.example.clientta.data.entity.Tratamento
 import com.example.clientta.data.repository.TratamentoRepository
 import com.example.clientta.ui.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -25,6 +27,14 @@ class TratamentoViewModel(
 
     private val _syncMessage = MutableStateFlow<String?>(null)
     val syncMessage: StateFlow<String?> = _syncMessage.asStateFlow()
+
+    val tratamentosAtivos: StateFlow<List<Tratamento>> =
+        tratamentoRepository.tratamentosAtivos
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = emptyList()
+            )
 
     init {
         carregar()
